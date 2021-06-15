@@ -176,6 +176,8 @@ class PlayState extends MusicBeatState
 	var wiggleShit:WiggleEffect = new WiggleEffect();
 
 	var talking:Bool = true;
+	var negMult:Float = 1;
+	var posMult:Float = 1;
 	var songScore:Int = 0;
 	var songScoreDef:Int = 0;
 	var scoreTxt:FlxText;
@@ -218,6 +220,23 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+	trace(SONG.song);
+	
+	switch(SONG.song)
+	{
+		case "Forensic Funk":
+			posMult = 3;
+			negMult = 3;
+		default:
+			posMult = 1;
+			negMult = 1;
+	}
+		
+ //this code works its just that the negHealth and posHealth isnt being detected for s ome reason ffs.
+		
+		trace("negMult" + negMult);
+		trace("posMult" + posMult);
+		
 		instance = this;
 		
 		if (FlxG.save.data.fpsCap > 290)
@@ -2395,7 +2414,7 @@ class PlayState extends MusicBeatState
 							}
 							else
 							{
-								health -= 0.075;
+								health -= 0.075 * negMult;
 								vocals.volume = 0;
 								if (theFunne)
 									noteMiss(daNote.noteData, daNote);
@@ -2608,7 +2627,8 @@ class PlayState extends MusicBeatState
 					score = -300;
 					combo = 0;
 					misses++;
-					health -= 0.2;
+					health -= 0.2 * negMult; //fnf has no built in health mulitiplier my life is a lie
+					trace("hello mario " + negMult);
 					ss = false;
 					shits++;
 					if (FlxG.save.data.accuracyMod == 0)
@@ -2616,7 +2636,7 @@ class PlayState extends MusicBeatState
 				case 'bad':
 					daRating = 'bad';
 					score = 0;
-					health -= 0.06;
+					health -= 0.06 * negMult;
 					ss = false;
 					bads++;
 					if (FlxG.save.data.accuracyMod == 0)
@@ -2627,12 +2647,12 @@ class PlayState extends MusicBeatState
 					ss = false;
 					goods++;
 					if (health < 2)
-						health += 0.04;
+						health += 0.04 * posMult;
 					if (FlxG.save.data.accuracyMod == 0)
 						totalNotesHit += 0.75;
 				case 'sick':
 					if (health < 2)
-						health += 0.1;
+						health += 0.1 * posMult;
 					if (FlxG.save.data.accuracyMod == 0)
 						totalNotesHit += 1;
 					sicks++;
@@ -3070,7 +3090,7 @@ class PlayState extends MusicBeatState
 	{
 		if (!boyfriend.stunned)
 		{
-			health -= 0.04;
+			health -= 0.04 * negMult;
 			if (combo > 5 && gf.animOffsets.exists('sad'))
 			{
 				gf.playAnim('sad');
