@@ -21,9 +21,9 @@ class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
-	var menuItems:Array<String> = ['Resume', 'Restart Song', 'Exit to menu'];
+	var menuItems:Array<String> = ['Resume', 'Restart Song','Baby mode for Babies', 'Exit to menu'];
 	var curSelected:Int = 0;
-
+	var PenisMan:Bool = true;
 	var pauseMusic:FlxSound;
 	var perSongOffset:FlxText;
 	
@@ -181,6 +181,21 @@ class PauseSubState extends MusicBeatSubstate
 					close();
 				case "Restart Song":
 					FlxG.resetState();
+				case "Baby mode for Babies":
+					PlayState.practiceModeThing = !PlayState.practiceModeThing;
+					trace(PlayState.practiceModeThing + "HANK");
+					trace(PlayState.SavedposMult + "HANK2");
+					if (PlayState.practiceModeThing)
+					{
+						PlayState.posMult = 0;
+						PlayState.negMult = 0;
+					}
+					else
+					{
+						PlayState.negMult = PlayState.SavednegMult;
+						PlayState.posMult = PlayState.SavedposMult;
+					}
+					close();
 				case "Exit to menu":
 					if(PlayState.loadRep)
 					{

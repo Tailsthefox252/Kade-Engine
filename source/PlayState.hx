@@ -68,6 +68,9 @@ class PlayState extends MusicBeatState
 {
 	public static var instance:PlayState = null;
 
+	public static var SavedposMult:Float;
+	public static var SavednegMult:Float;
+	
 	public static var curStage:String = '';
 	public static var SONG:SwagSong;
 	public static var isStoryMode:Bool = false;
@@ -176,8 +179,9 @@ class PlayState extends MusicBeatState
 	var wiggleShit:WiggleEffect = new WiggleEffect();
 
 	var talking:Bool = true;
-	var negMult:Float = 1;
-	var posMult:Float = 1;
+	public static var negMult:Float = 1;
+	public static var posMult:Float = 1;
+	public static var practiceModeThing:Bool;
 	var songScore:Int = 0;
 	var songScoreDef:Int = 0;
 	var scoreTxt:FlxText;
@@ -220,8 +224,10 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-	trace(SONG.song);
+	practiceModeThing = false;
 	
+	trace(SONG.song);	
+
 	switch(SONG.song)
 	{
 		case "Forensic Funk":
@@ -236,6 +242,8 @@ class PlayState extends MusicBeatState
 		
 		trace("negMult" + negMult);
 		trace("posMult" + posMult);
+		SavedposMult = posMult;
+		SavednegMult = negMult;
 		
 		instance = this;
 		
