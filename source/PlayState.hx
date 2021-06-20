@@ -2539,7 +2539,7 @@ class PlayState extends MusicBeatState
 								}
 								else
 								{
-									health -= 0.075;
+									health -= 0.075 * negMult;
 									vocals.volume = 0;
 									if (theFunne)
 										noteMiss(daNote.noteData, daNote);
