@@ -60,3 +60,7 @@ This game was made with love to Newgrounds and its community. Extra love to Tom 
 ### Kade Engine
 - [KadeDeveloper](https://twitter.com/KadeDeveloper) - Maintainer and lead programmer
 - [The contributors](https://github.com/KadeDev/Kade-Engine/graphs/contributors)
+
+### Additional Libraries Neccessary:
+   - **haxelib install heaps**
+    Even though heaps is an engine, I'm using it for masking shit so yeah.
